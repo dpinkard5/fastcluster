@@ -178,7 +178,8 @@ enum {
   METRIC_R_MANHATTAN = 2,
   METRIC_R_CANBERRA  = 3,
   METRIC_R_BINARY    = 4,
-  METRIC_R_MINKOWSKI = 5
+  METRIC_R_MINKOWSKI = 5,
+  METRIC_R_COSINE    = 6
 };
 
 #if HAVE_DIAGNOSTIC
@@ -248,6 +249,9 @@ public:
         distfn = &R_dissimilarity::minkowski;
         postprocessfn = &cluster_result::power;
         break;
+      case METRIC_R_COSINE:
+	distfn = &R_dissimilarity::cosine;
+	break;
       default:
         throw std::runtime_error(std::string("Invalid method."));
       }
