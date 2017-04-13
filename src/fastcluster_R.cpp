@@ -440,8 +440,9 @@ private:
       ++p1;
       ++p2;
     }
-    dist = dotProd/(sqrt(mag1)*(sqrt(mag2)));
-    return dist;
+    dist = 1 - (dotProd/(sqrt(mag1)*(sqrt(mag2))));
+   // printf("dist is %lf\n", dist);
+	return dist;
   }
 
   double maximum(t_index i1, t_index i2) const {
