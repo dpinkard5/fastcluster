@@ -1,0 +1,80 @@
+
+* Shell commands
+o git clone https://....................
+o Edit your file
+o git add FILENAME
+o git commit -m “CHANGE NOTE”
+o git push
+o git pull
+* Tutorials
+o bitbucket.org/fdac
+o https://bitbucket.org/fdac/students/src/master/Preliminary.md?fileviewer=file-view-default 
+* Changing the code
+o Before line 182, we need add "METRIC_R_COSINE = 6" with an extra comma placed at the end of the previous line
+o Within the switch statement that begins at line 228, we need to add the case for our cosine function
+* case METRIC_R_COSINE:
+* distfn = &R_dissimilarity::cosine;
+* break;
+o When the code begins to define the various methods of determining which clusters to merge, our method definition will need to be added here:
+* Copy a current method that already exists and try to compile
+
+Next Meeting
+* Need to use server to compile (ssh da2)
+* g++ -I /usr/share/R/include -o fastcluster_R fastcluster_R.cpp
+* use –L for libraries
+* localhost:8888 on internet window to access Jupyter
+* Before next week
+o Figure out the cosine similarity function and add it to fastcluster_R.cpp
+o Get onto Titan with the key
+o Look over pbdR
+
+
+
+Feb 6th Meeting
+	R CMD build --no-manual --no-build-vignettes fastcluster
+* Edit the function to actually be cosine
+o Commit and push
+o https://support.rstudio.com/hc/en-us/articles/200486518-Customizing-Package-Build-Options 
+* Install the package and check for issues
+o See if it works
+* pbdR
+o learn how Titan handles jobs
+o how to run pbdR on Titan
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+March 9th Meeting
+* https://www.rdocumentation.org/packages/fastcluster/versions/1.1.22/topics/hclust.vector 
+* Implemented cosine similarity
+o Line 426
+o Is this vector data or point data? What’s passed to these functions is typedef __int32 int_fast32_t
+o Tried to install and test fastcluster, but it says “invalid metric”
+* Should I make changes in the hclust.vector method since this is vector data?
+* pbdR
+o learn how Titan handles jobs
+o how to run pbdR on Titan
+
+* To-dos
+o Change cosine function to have X as the vector and keep other features (Non_NA)
+* Basically copy Euclidean
+o Change .R and .cpp file (anywhere that says Euclidean)
+o Make bit bucket
+o Look at what Sadika sends
+
+hclust.vector(X, method="single", members=NULL, metric='euclidean', p=NULL)
+
