@@ -13,7 +13,7 @@ This function implements hierarchical, agglomerative clustering with memory-savi
 \item{members}{\code{NULL} or a vector with length the number of observations.}
 \item{metric}{the distance measure to be used. This must be one of
   \code{"euclidean"}, \code{"maximum"}, \code{"manhattan"},
-  \code{"canberra"}, \code{"binary"} or \code{"minkowski"}. Any
+  \code{"canberra"}, \code{"binary"} or \code{"minkowski"} or \code{"cosine"}. Any
   unambiguous substring can be given.}
 \item{p}{parameter for the Minkowski metric.}
 }

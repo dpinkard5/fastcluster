@@ -139,7 +139,7 @@ test.vector <-  function() {
   # test
   method='single'
   cat(paste('Method:', method, '\n'))
-  for (metric in c('euclidean', 'maximum', 'manhattan', 'canberra', 'minkowski')) {
+  for (metric in c('euclidean', 'maximum', 'manhattan', 'canberra', 'minkowski', 'cosine')) {
     cat(paste('    Metric:', metric, '\n'))
     if (metric=='minkowski') {
       p = runif(1, min=1.0, max=10.0)

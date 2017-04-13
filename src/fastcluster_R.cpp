@@ -14,6 +14,7 @@
 #pragma GCC diagnostic ignored "-Wpadded"
 #endif
 #include <Rdefines.h>
+//#include <vector>
 #include <R_ext/Rdynload.h>
 #include <Rmath.h> // for R_pow
 #if HAVE_DIAGNOSTIC
@@ -23,6 +24,7 @@
 #define fc_isnan(X) ((X)!=(X))
 // There is ISNAN but it is so much slower on my x86_64 system with GCC!
 
+#include <math.h> // for sqrt in the cosine function
 #include <cmath> // for std::abs
 #include <cstddef> // for std::ptrdiff_t
 #include <limits> // for std::numeric_limits<...>::infinity()
@@ -421,6 +423,27 @@ public:
   }
 
 private:
+  double cosine(t_index i1, t_index i2) const {
+    double dist;
+    int j;
+    double dotProd = 0;
+    double mag1 = 0;
+    double mag2 = 0;
+    double * p1 = x+i1*nc;
+    double * p2 = x+i2*nc;
+    for(j = 0 ; j < nc ; ++j) {
+      if(both_non_NA(*p1, *p2)) {
+	dotProd += ((*p1)*(*p2));
+	mag1 += (*p1)*(*p1);
+	mag2 += (*p2)*(*p2);
+      }
+      ++p1;
+      ++p2;
+    }
+    dist = dotProd/(sqrt(mag1)*(sqrt(mag2)));
+    return dist;
+  }
+
   double maximum(t_index i1, t_index i2) const {
     double dev, dist;
     int count, j;
@@ -763,7 +786,7 @@ extern "C" {
       if (!IS_INTEGER(metric_) || LENGTH(metric_)!=1)
         Rf_error("'metric' must be a single integer.");
       int metric = INTEGER_VALUE(metric_) - 1; // index-0 based;
-      if (metric<0 || metric>5 ||
+      if (metric<0 || metric>6 ||
           (method!=METHOD_VECTOR_SINGLE && metric!=0) ) {
         Rf_error("Invalid metric index.");
       }

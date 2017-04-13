@@ -40,7 +40,7 @@ hclust.vector <- function(X, method='single', members=NULL, metric='euclidean', 
     stop("Ambiguous clustering method.")
 
   METRICS <- c("euclidean", "maximum", "manhattan", "canberra", "binary",
-               "minkowski")
+               "minkowski", "cosine")
   metric = pmatch(metric, METRICS)
   if (is.na(metric))
     stop("Invalid metric.")
